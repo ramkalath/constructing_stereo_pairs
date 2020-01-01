@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/assimp_.dir/include/modelloader.cpp.o CMakeFiles/assimp_.dir/include/shader.cpp.o CMakeFiles/assimp_.dir/src/main.cpp.o  -o /home/ram/workarea/constructing_stereo_pairs/bin/assimp_  -lglfw3 -lGLEW -lGL -lGLU -lSOIL -ldl -lXinerama -lXrandr -lXi -lXcursor -lX11 -lXxf86vm -lpthread -lassimp 
