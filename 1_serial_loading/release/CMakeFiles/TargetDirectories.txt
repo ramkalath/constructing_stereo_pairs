@@ -1,0 +1,3 @@
+/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/release/CMakeFiles/rebuild_cache.dir
+/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/release/CMakeFiles/assimp_.dir
+/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/release/CMakeFiles/edit_cache.dir

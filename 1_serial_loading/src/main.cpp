@@ -68,21 +68,8 @@ int main()
 
 	modelloader ironman("./resources/IronMan/IronMan.obj");
 	ironman.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-	ironman.modelmatrix = glm::translate(ironman.modelmatrix, glm::vec3(1.0f, -1.0f, -2.0f));
-	//ironman.modelmatrix = glm::rotate(ironman.modelmatrix, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+	ironman.modelmatrix = glm::translate(ironman.modelmatrix, glm::vec3(0.0f, -1.0f, 0.0f));
 	ironman.modelmatrix = glm::scale(ironman.modelmatrix, glm::vec3(0.01f, 0.01f, 0.01f));
-
-	modelloader teapot("./resources/teapot/Chaynik.obj");
-	teapot.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-	teapot.modelmatrix = glm::translate(teapot.modelmatrix, glm::vec3(-1.0f, 2.0f, 0.0f));
-	//teapot.modelmatrix = glm::rotate(teapot.modelmatrix, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-	teapot.modelmatrix = glm::scale(teapot.modelmatrix, glm::vec3(2.0f, 2.0f, 2.0f));
-
-	modelloader nanosuit("./resources/nanosuit/nanosuit.obj");
-	nanosuit.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-	nanosuit.modelmatrix = glm::translate(nanosuit.modelmatrix, glm::vec3(-1.0f, -2.0f, 0.0f));
-	//teapot.modelmatrix = glm::rotate(nanosuit.modelmatrix, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-	nanosuit.modelmatrix = glm::scale(nanosuit.modelmatrix, glm::vec3(0.2f, 0.2f, 0.2f));
 
 	// Create 2 framebuffers
 	float fb_plate[] = {-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 
@@ -104,6 +91,25 @@ int main()
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 
+	unsigned int fbo;
+	glGenFramebuffers(1, &fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+	unsigned int texColorBuffer;
+	glGenTextures(1, &texColorBuffer);
+	glBindTexture(GL_TEXTURE_2D, texColorBuffer);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+
+	unsigned int rboDepthStencil;
+	glGenRenderbuffers(1, &rboDepthStencil);
+	glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
+	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
@@ -124,20 +130,7 @@ int main()
 		
 		// render ironman
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(ironman.modelmatrix));
-
-		//auto start = std::chrono::high_resolution_clock::now();
 		ironman.RenderModel();
-		//auto stop = std::chrono::high_resolution_clock::now();
-		//auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop-start);
-		//std::cout << "time taken for rendering = " << duration.count() << " microseconds" << std::endl;
-		
-		// render teapot
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(teapot.modelmatrix));
-		teapot.RenderModel();
-
-		// render nanosuit
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(nanosuit.modelmatrix));
-		nanosuit.RenderModel();
 
 		glfwSwapBuffers(window);
 	}

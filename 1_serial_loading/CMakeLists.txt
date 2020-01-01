@@ -11,7 +11,7 @@ add_executable(${project_name} ./include/modelloader.cpp ./include/shader.cpp ./
 
 set(CMAKE_BUILD_TYPE Debug)
 #set(CMAKE_VERBOSE_MAKEFILE ON)
-set(EXECUTABLE_OUTPUT_PATH ../../bin)
+set(EXECUTABLE_OUTPUT_PATH ../bin)
 
 # add all the include files
 target_include_directories(${project_name} PUBLIC ../../include

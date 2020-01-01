@@ -189,7 +189,7 @@ void modelloader::CreateOpenGLDataStructures()
 void modelloader::RenderModel() 
 {
 	glBindVertexArray(this->VAO);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glDrawElements(GL_TRIANGLES, this->IndicesSize/sizeof(unsigned int), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
