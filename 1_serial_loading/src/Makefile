@@ -1,23 +1,21 @@
-CC = g++
+# (TODO: enter project name here)
+PROJECT_NAME = assimp_
 
-CFLAGS = -std=c++0x -g -Wall
-
-INCLUDE = -I/usr/local/include/GLFW -I/usr/include/SOIL
-
-LIBS = -lglfw3 -lm -lGLEW -lGL -lGLU -lSOIL -ldl -lXinerama -lXrandr -lXi -lXcursor -lX11 -lXxf86vm -lpthread -lassimp
-
-# enter filename without extension
-FILENAME1 = main
-FILENAME2 = ../include/shader
-FILENAME3 = ../include/modelloader
-FILENAME4 = ../include/gamesettings
-
-all: $(FILENAME4).cpp $(FILENAME3).cpp $(FILENAME2).cpp $(FILENAME1).cpp
-	@$(CC) $(CFLAGS) $(INCLUDE) $(FILENAME4).cpp $(FILENAME3).cpp $(FILENAME2).cpp $(FILENAME1).cpp -o ../bin/$(FILENAME1) $(LIBS)
+all:
+	echo "#define USE_GLEW" > use_glew.h
+	@cd ../build && cmake .. && make
+	rm use_glew.h && touch use_glew.h
+	@echo "\033[92m ------------- Compilation Successful ------------------- \033[0m" 
 
 run:
-	@../bin/./$(FILENAME1)	
+	@../bin/$(PROJECT_NAME)
+	@echo "\033[92m ------------- Execution Successful ------------------- \033[0m"
+
+debug:
+	cd ../build && \
+	cmake -G "CodeBlocks - Unix Makefiles" .. && \
+	codeblocks ${PROJECT_NAME}.cbp &! > /dev/null
 
 clean:
-	rm ../bin/./$(FILENAME1) 
-
+	rm -rf ../build/*
+	rm ../bin/*

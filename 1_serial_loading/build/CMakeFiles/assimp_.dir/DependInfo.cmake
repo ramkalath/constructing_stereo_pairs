@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/include/gamesettings.cpp" "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/build/CMakeFiles/assimp_.dir/include/gamesettings.cpp.o"
   "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/include/modelloader.cpp" "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/build/CMakeFiles/assimp_.dir/include/modelloader.cpp.o"
   "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/include/shader.cpp" "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/build/CMakeFiles/assimp_.dir/include/shader.cpp.o"
   "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/src/main.cpp" "/home/ram/workarea/constructing_stereo_pairs/1_serial_loading/build/CMakeFiles/assimp_.dir/src/main.cpp.o"
@@ -14,6 +15,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../../../include"
   "../.."
+  "/usr/local/include"
   )
 
 # Targets to which this target links.

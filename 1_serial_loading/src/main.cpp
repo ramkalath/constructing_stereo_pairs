@@ -64,51 +64,51 @@ int main()
 	glViewport(0, 0, globalsettings.width, globalsettings.height);
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
-	Shader fbplate_shader("./shaders/fbplate_vertex_shader.vert", "./shaders/fbplate_fragment_shader.frag");
+	//Shader fbplate_shader("./shaders/fbplate_vertex_shader.vert", "./shaders/fbplate_fragment_shader.frag");
 
 	modelloader ironman("./resources/IronMan/IronMan.obj");
 	ironman.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
 	ironman.modelmatrix = glm::translate(ironman.modelmatrix, glm::vec3(0.0f, -1.0f, 0.0f));
 	ironman.modelmatrix = glm::scale(ironman.modelmatrix, glm::vec3(0.01f, 0.01f, 0.01f));
 
-	// Create 2 framebuffers
-	float fb_plate[] = {-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 
-						 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-						 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-						-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-						 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-						-1.0f,  1.0f, 0.0f, 0.0f, 1.0f};
+	// Create framebuffers for the right and left eye
+	//float fb_plate[] = {-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 
+						 //1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+						 //1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+						//-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+						 //1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+						//-1.0f,  1.0f, 0.0f, 0.0f, 1.0f};
 
-	unsigned int VBO_plate, VAO_plate;
-	glGenVertexArrays(1, &VAO_plate);
-	glGenBuffers(1, &VBO_plate);
-	glBindVertexArray(VAO_plate);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO_plate);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(fb_plate), fb_plate, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)(3*sizeof(float)));
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glBindVertexArray(0);
+	//unsigned int VBO_plate, VAO_plate;
+	//glGenVertexArrays(1, &VAO_plate);
+	//glGenBuffers(1, &VBO_plate);
+	//glBindVertexArray(VAO_plate);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO_plate);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(fb_plate), fb_plate, GL_STATIC_DRAW);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)0);
+	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)(3*sizeof(float)));
+	//glEnableVertexAttribArray(0);
+	//glEnableVertexAttribArray(1);
+	//glBindVertexArray(0);
 
-	unsigned int fbo;
-	glGenFramebuffers(1, &fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+	//unsigned int fbo;
+	//glGenFramebuffers(1, &fbo);
+	//glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-	unsigned int texColorBuffer;
-	glGenTextures(1, &texColorBuffer);
-	glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//glBindTexture(GL_TEXTURE_2D, 0);
+	//unsigned int texColorBuffer;
+	//glGenTextures(1, &texColorBuffer);
+	//glBindTexture(GL_TEXTURE_2D, texColorBuffer);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	////glBindTexture(GL_TEXTURE_2D, 0);
 
-	unsigned int rboDepthStencil;
-	glGenRenderbuffers(1, &rboDepthStencil);
-	glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
-	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	//unsigned int rboDepthStencil;
+	//glGenRenderbuffers(1, &rboDepthStencil);
+	//glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
+	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+	//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil);
+	////glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
 	while(!glfwWindowShouldClose(window))
 	{
