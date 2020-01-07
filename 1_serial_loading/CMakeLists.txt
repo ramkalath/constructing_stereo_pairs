@@ -15,7 +15,7 @@ set(EXECUTABLE_OUTPUT_PATH ../bin)
 
 # add all the include files
 target_include_directories(${project_name} PUBLIC ../../include
-								PUBLIC /usr/include 
+								PUBLIC /usr/include/
 								PUBLIC ../ 
 								PUBLIC /usr/local/include) # you can keep adding more if you want
 

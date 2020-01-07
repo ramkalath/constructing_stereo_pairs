@@ -9,3 +9,4 @@ void main()
 {
 	color = texture(this_texture, texCoords);
 }
+
