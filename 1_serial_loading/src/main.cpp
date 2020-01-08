@@ -20,7 +20,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <SOIL/SOIL.h>
 
-unsigned int screenWidth = 800, screenHeight = 600;
+//unsigned int screenWidth = 1366, screenHeight = 768;
+unsigned int screenWidth = 1920, screenHeight = 600;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -198,14 +199,14 @@ int main()
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -4.0f));
 	model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-	//model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.0f));
 	// view matrix
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 2.0f); 
 	view = glm::lookAt(camera_pos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	// projection perspective matrix
 	float angle = 45.0f, n = 0.2f, f = 20.0f;
-	float ar = (float)screenWidth/(float)screenHeight;
+	//float ar = (float)screenWidth/(float)screenHeight;
+	float ar = 16.0f/9.0f;
 	glm::mat4 projection_perspective = {1/(ar*tan(angle/2)), 0, 0, 0, 0, 1/tan(angle/2), 0, 0, 0, 0, -(f+n)/(f-n), -2*f*n/(f-n), 0, 0, -1, 0};
 	projection_perspective = glm::transpose(projection_perspective);
 
