@@ -4,9 +4,7 @@
  * Email : ramkalath@gmail.com
  * Breif Description : streo pairs
  * Detailed Description : creating stereo pairs
- *							TODO(ram): resize the window to be 16:9
- *                          TODO(ram): fill the screen appropriately
- *							TODO(ram): further modifications of model matrix can be done after that
+ *							TODO(ram): Tweakings to make it AR/VR
  *****************************************************************************/
 #include <iostream>
 #include <string>
@@ -215,8 +213,8 @@ int main()
 
 	// model matrix
 	glm::mat4 model_plate = glm::mat4(1.0f);
-	glm::mat4 model_plate1 = glm::translate(model_plate, glm::vec3(-1.1f, 0.0f, -2.0f));
-	glm::mat4 model_plate2 = glm::translate(model_plate, glm::vec3(1.1f, 0.0f, -2.0f));
+	glm::mat4 model_plate1 = glm::translate(model_plate, glm::vec3(-1.0f, 0.0f, -2.0f));
+	glm::mat4 model_plate2 = glm::translate(model_plate, glm::vec3(1.0f, 0.0f, -2.0f));
 	//model_plate = glm::rotate(model_plate, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
 
     // Game loop
