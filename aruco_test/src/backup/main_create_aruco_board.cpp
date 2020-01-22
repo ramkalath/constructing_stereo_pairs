@@ -1,8 +1,3 @@
-// create_board.cpp
-// to run this: ./binary --bb=1 -d=10 -h=5 -l=60 -m=15 -s=15 -w=5 "marker_test.png"
-// 
-
-
 #include <opencv2/highgui.hpp>
 #include <opencv2/aruco.hpp>
 
@@ -25,34 +20,25 @@ const char* keys  =
         "{si       | false | show generated image }";
 }
 
-int main(int argc, char *argv[]) {
-    CommandLineParser parser(argc, argv, keys);
-    parser.about(about);
+int main() 
+{
 
-    if(argc < 7) {
-        parser.printMessage();
-        return 0;
-    }
+    int markersX = 5;
+    int markersY = 5;
+    int markerLength = 60;
+    int markerSeparation = 15;
+    int dictionaryId = 10;
+    int margins = 15;
 
-    int markersX = parser.get<int>("w");
-    int markersY = parser.get<int>("h");
-    int markerLength = parser.get<int>("l");
-    int markerSeparation = parser.get<int>("s");
-    int dictionaryId = parser.get<int>("d");
-    int margins = markerSeparation;
-    if(parser.has("m")) {
-        margins = parser.get<int>("m");
-    }
+    int borderBits = 1;
+    bool showImage = 1;
 
-    int borderBits = parser.get<int>("bb");
-    bool showImage = parser.get<bool>("si");
+    //String out = parser.get<String>(0);
 
-    String out = parser.get<String>(0);
-
-    if(!parser.check()) {
-        parser.printErrors();
-        return 0;
-    }
+    //if(!parser.check()) {
+        //parser.printErrors();
+        //return 0;
+    //}
 
     Size imageSize;
     imageSize.width = markersX * (markerLength + markerSeparation) - markerSeparation + 2 * margins;
@@ -74,7 +60,7 @@ int main(int argc, char *argv[]) {
         waitKey(0);
     }
 
-    imwrite(out, boardImage);
+    imwrite("marker1.jpg", boardImage);
 
     return 0;
 }

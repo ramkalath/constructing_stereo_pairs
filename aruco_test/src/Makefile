@@ -15,7 +15,7 @@ project:
 
 run:
 	@echo -e "\033[92m ------------- Execution Begin ------------------- \033[0m"
-	@../bin/$(PROJECT_NAME)
+	@../bin/$(PROJECT_NAME) --bb=1 -d=10 -h=5 -l=60 -m=15 -s=15 -w=5 "marker_test.png"
 
 clean:
 	rm -rf ../build/*
